@@ -1,0 +1,47 @@
+name: Deploy Self Discovered Project to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.15.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular project
+        run: npm run build --prod
+
+      - name: List files in dist directory for debugging
+        run: ls -la dist/selfdiscovered
+
+      - name: Move files from browser to selfdiscovered
+        run: node movefiles.js
+        if: success()
+
+      - name: List files in dist/selfdiscovered after move
+        run: ls -la dist/selfdiscovered
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: ${{ secrets.FTP_PORT }}
+          local-dir: dist/selfdiscovered/
+          server-dir: /
+          log-level: minimal
