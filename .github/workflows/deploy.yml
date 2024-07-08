@@ -1,4 +1,4 @@
-name: Deploy Self Discovered Admin Project to cPanel.
+name: Deploy Self Discovered Admin Project to cPanel
 
 on:
   push:
@@ -27,6 +27,14 @@ jobs:
       - name: Move files from browser to selfdiscoveredadmin
         run: node movefiles.js
         if: success()
+
+      - name: Debug FTP server connection
+        run: |
+          ftp -inv ${{ secrets.FTP_SERVER }} <<EOF
+          user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          ls /
+          bye
+          EOF
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
