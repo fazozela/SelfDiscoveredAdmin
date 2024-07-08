@@ -1,4 +1,4 @@
-name: Deploy Self Discovered Project to cPanel.
+name: Deploy Self Discovered Admin Project to cPanel.
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       - name: Build Angular project
         run: npm run build --prod
 
-      - name: Move files from browser to selfdiscovered
+      - name: Move files from browser to selfdiscoveredadmin
         run: node movefiles.js
         if: success()
 
@@ -37,5 +37,5 @@ jobs:
           protocol: ftp
           port: ${{ secrets.FTP_PORT }}
           local-dir: dist/selfdiscoveredadmin/
-          server-dir: admin/
+          server-dir: public_html/
           log-level: minimal
