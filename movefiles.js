@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const fse = require('fs-extra');
 
-const sourceDir = path.join(__dirname, 'dist', 'selfdiscovered', 'browser');
-const destDir = path.join(__dirname, 'dist', 'selfdiscovered');
+const sourceDir = path.join(__dirname, 'dist', 'selfdiscoveredadmin', 'browser');
+const destDir = path.join(__dirname, 'dist', 'selfdiscoveredadmin');
 
 if (fs.existsSync(sourceDir)) {
   fs.readdirSync(sourceDir).forEach(file => {
