@@ -37,5 +37,5 @@ jobs:
           protocol: ftp
           port: ${{ secrets.FTP_PORT }}
           local-dir: dist/selfdiscoveredadmin/
-          server-dir: /admin/
+          server-dir: public_html/admin/
           log-level: minimal
