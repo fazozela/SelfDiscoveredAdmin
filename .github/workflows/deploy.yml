@@ -1,4 +1,4 @@
-name: Deploy Self Discovered Admin Project to cPanel.
+name: Deploy Self Discovered Admin Project to cPanel
 
 on:
   push:
