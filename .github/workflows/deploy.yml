@@ -32,6 +32,7 @@ jobs:
         run: |
           ftp -inv ${{ secrets.FTP_SERVER }} <<EOF
           user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}
+          passive
           ls /
           bye
           EOF
@@ -45,5 +46,5 @@ jobs:
           protocol: ftp
           port: ${{ secrets.FTP_PORT }}
           local-dir: dist/selfdiscoveredadmin/
-          server-dir: /
+          server-dir: public_html/
           log-level: minimal
