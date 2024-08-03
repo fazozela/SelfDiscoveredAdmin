@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <div class="row mb-5">
+    <div class="col">
+      <h3>Consultas</h3>
+    </div>
+  </div>
+
+  <div class="consultation-list">
+    <div class="consultation-card" *ngFor="let consultation of consultations">
+      <div class="consultation-info">
+        <h3 class="consultation-title">{{ consultation.title }}</h3>
+      </div>
+      <div class="consultation-actions">
+        <a class="btn btn-arrow" [routerLink]="consultation.id">
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

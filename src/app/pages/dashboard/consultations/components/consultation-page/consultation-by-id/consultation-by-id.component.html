@@ -1,0 +1,56 @@
+<div class="consultation-container" *ngIf="consultation; else loading">
+  <div class="consultation-card">
+    <div class="consultation-header">
+      <h2>{{ consultation.title }}</h2>
+    </div>
+    <div class="consultation-body">
+      <p class="consultation-content">{{ consultation.content }}</p>
+      <hr>
+      <div class="replies-section">
+        <h3>Respuestas</h3>
+        <div class="reply-list">
+          <div *ngFor="let reply of consultation.replies" class="reply-card" [ngClass]="{'admin-reply': isAdminReply(reply), 'user-reply': !isAdminReply(reply)}">
+            <div class="reply-content">
+              <p>{{ reply.content }}</p>
+            </div>
+            <div class="reply-footer">
+              <span class="reply-author">{{ reply.user.email }} </span>
+            </div>
+            <div class="reply-footer">
+              <span class="reply-date">{{ reply.createdAt | date:'short' }}</span>
+            </div>
+            <button *ngIf="canReply(reply)" (click)="setReplyingTo(reply)" class="btn-reply">Responder</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- New button for adding a new response, only when there are no replies -->
+      <button *ngIf="!isReplying && consultation.replies.length === 0" (click)="initiateNewReply()" class="btn-new-reply">Agregar una respuesta</button>
+
+      <div *ngIf="isReplying" class="reply-form">
+        <h4>Agrega tu respuesta</h4>
+        <div class="replying-to-alert" *ngIf="replyingTo">
+          Responder a: {{ replyingTo.user.email }}
+          <button (click)="clearReplyingTo()" class="btn-cancel">Cancel</button>
+        </div>
+        <form [formGroup]="replyForm" (ngSubmit)="submitReply()">
+          <div class="form-group">
+            <textarea class="reply-input" rows="3" formControlName="content" placeholder="Escribe tu respuesta aquí..."></textarea>
+            <div *ngIf="contentControl?.invalid && (contentControl?.dirty || contentControl?.touched)" class="error-message">
+              <small *ngIf="contentControl?.errors?.['required']">Reply content is required.</small>
+              <small *ngIf="contentControl?.errors?.['minlength']">Reply must be at least 3 characters long.</small>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit" [disabled]="replyForm.invalid">Enviar respuesta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Cargando consultas...</p>
+  </div>
+</ng-template>
