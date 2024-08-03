@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2 class="mb-4">{{ isEditing ? 'Actualizar' : 'Crear' }} Blog</h2>
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Título</label>
+      <input type="text" class="form-control" id="title" formControlName="title">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Contenido</label>
+      <quill-editor formControlName="content" id="content" [styles]="{ height: '200px' }" [modules]="quillConfig"></quill-editor>
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Autor</label>
+      <input type="text" class="form-control" id="author" formControlName="author">
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">Image</label>
+      <input type="file" class="form-control" id="imageUrl" (change)="onFileChange($event)">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="blogForm.invalid">
+      {{ isEditing ? 'Actualizar' : 'Crear' }} Blog
+    </button>
+  </form>
+</div>

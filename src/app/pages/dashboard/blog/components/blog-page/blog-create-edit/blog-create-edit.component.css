@@ -1,0 +1,17 @@
+.container {
+  max-width: 600px;
+}
+.btn-primary {
+  background-color: #f9b2b2;
+  border-color: #f9b2b2;
+  color: #313445;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #ff9999;
+  border-color: #ff9999;
+  color: #313445;
+}
+.form-control:focus {
+  border-color: #f9b2b2;
+  box-shadow: 0 0 0 0.2rem rgba(249, 178, 178, 0.25);
+}

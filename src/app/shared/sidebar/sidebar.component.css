@@ -1,0 +1,25 @@
+.sidebar {
+  min-height: calc(100vh - 56px); /* Adjust based on your navbar height */
+  background-color: #313445 !important;
+}
+
+.nav-link {
+  color: #ffffff;
+  transition: all 0.3s;
+}
+
+.nav-link:hover {
+  background-color: rgba(249, 178, 178, 0.1);
+}
+
+.nav-link.active {
+  background-color: #f9b2b2 !important;
+  color: #313445 !important;
+}
+
+@media (max-width: 767.98px) {
+  #sidebar-wrapper {
+    position: static !important;
+    height: auto;
+  }
+}

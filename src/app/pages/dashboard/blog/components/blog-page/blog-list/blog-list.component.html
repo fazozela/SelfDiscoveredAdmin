@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-create" routerLink="crear">
+      <i class="fas fa-plus"></i> Crear Blog
+    </button>
+  </div>
+
+  <div class="blog-list">
+    <div class="blog-card" *ngFor="let blog of blogs">
+      <div class="blog-info">
+        <h3 class="blog-title">{{ blog.title }}</h3>
+        <p class="blog-author">Autor: {{ blog.author }}</p>
+      </div>
+      <div class="blog-actions">
+        <button class="btn btn-edit" [routerLink]="['editar', blog.id]">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="btn btn-delete" (click)="deleteBlog(blog.id)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
